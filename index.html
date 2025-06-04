@@ -6,76 +6,85 @@
     <title>Nabilah Putri Sawindra - Profile</title>
     <style>
         body {
-            background-color: #1a1a1a; /* Latar belakang gelap */
             color: #e0e0e0; /* Warna teks terang */
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Contoh font modern */
             margin: 0;
             padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+            display: flex; /* Untuk menengahkan .container */
+            justify-content: center; /* Untuk menengahkan .container */
+            align-items: center; /* Untuk menengahkan .container */
+            min-height: 100vh; /* Memastikan .container bisa ditengahkan secara vertikal */
             text-align: center;
-            /* Jika Anda punya gambar latar, bisa ditambahkan di sini:
-            background-image: url('url-gambar-latar-anda.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            */
+            overflow: hidden; /* Mencegah scrollbar jika video sedikit lebih besar dari viewport */
+        }
+
+        #background-video {
+            position: fixed; /* Video tetap di posisinya saat di-scroll */
+            right: 0;
+            bottom: 0;
+            min-width: 100%; /* Memastikan video menutupi lebar viewport */
+            min-height: 100%; /* Memastikan video menutupi tinggi viewport */
+            width: auto;   /* Menjaga aspek rasio video */
+            height: auto;  /* Menjaga aspek rasio video */
+            z-index: -100; /* Video diletakkan di lapisan paling belakang */
+            object-fit: cover; /* Memastikan video menutupi seluruh area tanpa merusak aspek rasio (cropping dimungkinkan) */
+            /* Anda bisa menambahkan warna fallback jika video gagal dimuat, contoh: background-color: #1a1a1a; */
         }
 
         .container {
-            background-color: rgba(0, 0, 0, 0.6); /* Semi-transparan hitam untuk kontainer konten */
+            background-color: rgba(0, 0, 0, 0.65); /* Latar semi-transparan untuk kontainer konten agar video di belakang terlihat */
             padding: 30px 40px;
             border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-            max-width: 500px;
-            width: 90%;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.7); /* Bayangan untuk efek kedalaman */
+            max-width: 500px; /* Lebar maksimal kontainer */
+            width: 90%; /* Lebar kontainer pada layar kecil */
+            position: relative; /* Diperlukan agar z-index berfungsi dengan benar terhadap elemen fixed (video) */
+            z-index: 1; /* Memastikan kontainer konten berada di atas video latar belakang */
         }
 
         .profile-picture {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            border: 3px solid #555; /* Border untuk foto profil */
+            width: 150px;  /* Lebar foto profil */
+            height: 150px; /* Tinggi foto profil */
+            border-radius: 50%; /* Membuat foto profil menjadi bulat */
+            border: 3px solid #555; /* Bingkai untuk foto profil */
             margin-bottom: 20px;
-            object-fit: cover;
+            object-fit: cover; /* Memastikan gambar mengisi area tanpa distorsi */
         }
 
         h1 {
-            font-size: 2.5em;
+            font-size: 2.5em; /* Ukuran font nama */
             margin-top: 0;
             margin-bottom: 5px;
-            color: #ffffff;
+            color: #ffffff; /* Warna teks nama */
         }
 
         .handle {
-            font-size: 1.2em;
-            color: #bbbbbb; /* Warna untuk handle/username */
+            font-size: 1.2em; /* Ukuran font untuk username/handle */
+            color: #bbbbbb; /* Warna teks untuk username/handle */
             margin-bottom: 20px;
         }
 
         .bio {
-            font-size: 1em;
-            color: #cccccc;
+            font-size: 1em; /* Ukuran font untuk bio */
+            color: #cccccc; /* Warna teks untuk bio */
             margin-bottom: 30px;
-            line-height: 1.6;
+            line-height: 1.6; /* Jarak antar baris untuk bio */
         }
 
         .social-links a {
-            display: block;
-            background-color: #333; /* Warna tombol link */
-            color: #ffffff;
+            display: block; /* Membuat setiap link mengambil satu baris penuh (seperti tombol) */
+            background-color: #333; /* Warna latar tombol link */
+            color: #ffffff; /* Warna teks tombol link */
             padding: 12px 20px;
-            margin: 10px 0;
-            border-radius: 5px;
-            text-decoration: none;
+            margin: 10px 0; /* Jarak antar tombol link */
+            border-radius: 5px; /* Membuat sudut tombol melengkung */
+            text-decoration: none; /* Menghilangkan garis bawah pada link */
             font-size: 1.1em;
-            transition: background-color 0.3s ease, transform 0.2s ease;
+            transition: background-color 0.3s ease, transform 0.2s ease; /* Efek transisi saat hover */
         }
 
         .social-links a:hover {
-            background-color: #555; /* Warna tombol saat hover */
+            background-color: #555; /* Warna latar tombol saat disentuh mouse (hover) */
             transform: translateY(-2px); /* Efek sedikit terangkat saat hover */
         }
 
@@ -88,8 +97,13 @@
 </head>
 <body>
 
+    <video autoplay muted loop id="background-video">
+        <source src="background_video.mp4" type="video/mp4">
+        Browser Anda tidak mendukung tag video. (Teks ini muncul jika video tidak bisa diputar)
+    </video>
+
     <div class="container">
-        <img src="foto_profil.jpg.jpg" alt="Foto Profil Nabilah Putri Sawindra" class="profile-picture">
+        <img src="foto_profil.jpg" alt="Foto Profil Nabilah Putri Sawindra" class="profile-picture">
 
         <h1>Nabilah Putri Sawindra</h1>
         <p class="handle">@nsawindra</p>
@@ -110,6 +124,7 @@
     </div>
 
     <script>
+        // Untuk menampilkan tahun secara dinamis di footer
         document.getElementById('year').textContent = new Date().getFullYear();
     </script>
 
